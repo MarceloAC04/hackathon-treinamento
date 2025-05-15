@@ -43,7 +43,9 @@ def Home():
             
     st.markdown("---")
     
-    df_selection['mes_ano'] = df_selection['data'].dt.to_period('Y').astype(str)
+    df_selection['data'] = pd.to_datetime(df_selection['data'], dayfirst=True)
+    
+    df_selection['mes_ano'] = df_selection['data'].dt.to_period('M').astype(str)
     df_grouped = (
         df_selection
         .groupby(['mes_ano', 'setor'])['valor']
